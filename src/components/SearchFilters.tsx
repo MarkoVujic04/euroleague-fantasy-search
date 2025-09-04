@@ -17,23 +17,24 @@ export const SearchFilters = ({
   onTeamChange,
 }: SearchFiltersProps) => {
   const teams = [
-    "All Teams",
-    "Real Madrid",
-    "FC Barcelona",
-    "Anadolu Efes",
-    "CSKA Moscow",
-    "Olympiacos",
-    "Panathinaikos",
-    "Fenerbahçe",
-    "Bayern Munich",
-    "Zalgiris Kaunas",
-    "Virtus Bologna"
+    { label: "All Teams", value: "ALL" },
+    { label: "Real Madrid", value: "RMB" },
+    { label: "FC Barcelona", value: "BAR" },
+    { label: "Anadolu Efes", value: "EFS" },
+    { label: "Olympiacos", value: "OLY" },
+    { label: "Panathinaikos", value: "PAO" },
+    { label: "Fenerbahçe", value: "FEN" },
+    { label: "Bayern Munich", value: "BER" },
+    { label: "Zalgiris Kaunas", value: "ZAL" },
+    { label: "Virtus Bologna", value: "VIR" },
+    { label: "Red Star Belgrade", value: "RED" },
+    { label: "Paris", value: "PRS" },
   ];
+
 
   return (
     <div className="bg-card rounded-lg p-6 shadow-elevated border">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Search Input */}
         <div className="space-y-2">
           <Label htmlFor="search">Search Players</Label>
           <div className="relative">
@@ -54,13 +55,27 @@ export const SearchFilters = ({
             <SelectTrigger>
               <SelectValue placeholder="Select team" />
             </SelectTrigger>
-            <SelectContent>
-              {teams.map((team) => (
-                <SelectItem key={team} value={team}>
-                  {team}
+            <SelectContent
+              position="popper"
+              side="bottom"
+              align="start"
+              sideOffset={4}
+              avoidCollisions={false}
+              className="
+                z-[1000]
+                w-[--radix-select-trigger-width]
+                max-h-60       
+                overflow-y-auto 
+                bg-orange-600/50
+              "
+            >
+              {teams.map((t) => (
+                <SelectItem key={t.value} value={t.value}>
+                  {t.label}
                 </SelectItem>
               ))}
             </SelectContent>
+
           </Select>
         </div>
 

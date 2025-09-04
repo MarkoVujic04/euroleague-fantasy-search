@@ -6,19 +6,18 @@ import { fetchPlayers } from "../lib/api";
 
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedTeam, setSelectedTeam] = useState("All Teams");
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [selectedTeam, setSelectedTeam] = useState("ALL");
 
   useEffect(() => {
-    const abort = new AbortController();
     async function load() {
+      setLoading(true);
+      setErr(null);
       try {
-        setLoading(true);
-        setErr(null);
         const params = {
-          team: selectedTeam !== "All Teams" ? selectedTeam : undefined,
+          team: selectedTeam !== "ALL" ? selectedTeam : undefined,
           playerName: searchTerm || undefined,
         };
         const data = await fetchPlayers(params);
@@ -30,8 +29,8 @@ export const Search = () => {
       }
     }
     load();
-    return () => abort.abort();
   }, [searchTerm, selectedTeam]);
+
 
   const handleViewDetails = (p: Player) => {
     console.log("view", p.playerName);
@@ -60,7 +59,7 @@ export const Search = () => {
           onTeamChange={setSelectedTeam}
         />
 
-        <div className="mt-8">
+        <div className="mt-8 min-h-70">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-semibold text-foreground">
               {loading ? "Loading…" : `${players.length} Players Found`}
