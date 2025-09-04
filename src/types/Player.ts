@@ -1,0 +1,28 @@
+export type Player = {
+  playerName: string;
+  team: string;
+  gp: number;
+  gs: number;
+  minutes: number;
+  pts: number;
+  twoPm: number;
+  twoPa: number;
+  twoPct: number;
+  threePm: number;
+  threePa: number;
+  threePct: number;
+  ftm: number;
+  fta: number;
+  ftPct: number;
+  orReb: number;
+  drReb: number;
+  trReb: number;
+  ast: number;
+  stl: number;
+  turnover: number;
+  blk: number;
+  blka: number;
+  fc: number;
+  fd: number;
+  pir: number;
+};
